@@ -14,10 +14,15 @@ export default function Cliente05() {
 
   const enviarMensagem = () => {
 
+   
+    let data = new Date();
+    let dataFormatada = ((data.getDate() +5)) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
+    // console.log(dataFormatada);
+
     var dia = "em: *5 dias*"
     // setTimeout(() => {
     cliente05.forEach((item) => {
-      var smsScript = "Prezado Cliente     Estamos entrando em contato para informar que o seu Certificado digital:     Modelo: *" + item.tipocd + ". - " + item.nome + "* Expira " + dia + "        fc:" + item.id + "            Não deixe para a última hora, ligue agora            para (16) 3325-4134 e renove o seu certificado.            Atenciosamente Equipe Rede Brasil Rp"
+      var smsScript = "Prezado Cliente \n \nEstamos entrando em contato para informar que o seu Certificado digital \nModelo: *" + item.tipocd + ". - " + item.nome + "* \nExpira " + dia + " " + dataFormatada + "      \nfc:" + item.id + "       \n \nNão deixe para a última hora, ligue agora          \npara (16) 3325-4134 e renove o seu certificado.          \nAtenciosamente Equipe Rede Brasil Rp"
 
       var myHeaders = new Headers();
       myHeaders.append("access-token", "60de0c8bb0012f1e6ac5546b");
@@ -25,9 +30,10 @@ export default function Cliente05() {
 
       var raw = JSON.stringify({
         "number": 55 + item.telefone,
+        // "number": 5516988247675,
         "message": smsScript,
         "forceSend": true,
-        "verifyContact": true
+        "verifyContact": false,
       });
 
       var requestOptions = {
