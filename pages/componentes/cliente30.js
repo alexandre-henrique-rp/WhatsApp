@@ -13,22 +13,14 @@ export default function Cliente30() {
     setCliente30(dados);
   }
 
+  const enviarMensagem = () => {
 
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-  // + item.telefone,
-  async function enviarMensagem() {
+    cliente30.forEach((item) => {
 
-    var dia = "em: *30 dias*";
+      var dia = "em: *30 dias*";
 
-    let data = new Date();
-    let dataFormatada = ((data.getDate() + 30)) + "/" + ((data.getMonth() + 1)) + "/" + data.getFullYear();
-    // console.log(dataFormatada);
+      var smsScript = "Prezado Cliente \n \nEstamos entrando em contato para informar que o seu Certificado digital \nModelo: *" + item.tipocd + ". - " + item.nome + "* \nExpira " + dia + "            " + item.vctoCD.substr(8, 2) + "/" + item.vctoCD.substr(5, 2) + "/" + item.vctoCD.substr(0, 4) + "      \nfc:" + item.id + "       \n \nNão deixe para a última hora, ligue agora          \npara (16) 3325-4134 e renove o seu certificado.          \nAtenciosamente Equipe Rede Brasil Rp"
 
-    await cliente30.forEach((item) => {
-      var smsScript = "Prezado Cliente \n \nEstamos entrando em contato para informar que o seu Certificado digital \nModelo: *" + item.tipocd + ". - " + item.nome + "* \nExpira " + dia + " " + dataFormatada + "      \nfc:" + item.id + "       \n \nNão deixe para a última hora, ligue agora          \npara (16) 3325-4134 e renove o seu certificado.          \nAtenciosamente Equipe Rede Brasil Rp"
-      
       var myHeaders = new Headers();
       myHeaders.append("access-token", "60de0c8bb0012f1e6ac5546b");
       myHeaders.append("Content-Type", "application/json");
@@ -45,54 +37,16 @@ export default function Cliente30() {
         headers: myHeaders,
         body: raw,
         redirect: 'follow'
+          .sleep(20000)
       };
       fetch("https://api.zapstar.com.br/core/v2/api/chats/send-text", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
     })
-    await sleep(20000);
-    console.log('proximo')
-    for (let i = 0; i < cliente30.length; i++) {
-      if (i === 4)
-        await sleep(20000);
-      console.log(i)
-    }
-
   }
 
 
-  // const enviarMensagem = () => {
-  // setTimeout(() => {
-  // cliente30.forEach((item) => {
-  //   var smsScript = "Prezado Cliente     Estamos entrando em contato para informar que o seu Certificado digital:     Modelo: *" + item.tipocd + ". - " + item.nome + "* Expira em: 30 dias        fc:" + item.id + "            Não deixe para a última hora, ligue agora            para (16) 3325-4134 e renove o seu certificado.            Atenciosamente Equipe Rede Brasil Rp"
-
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("access-token", "60de0c8bb0012f1e6ac5546b");
-  //   myHeaders.append("Content-Type", "application/json");
-
-  //   var raw = JSON.stringify({
-  //     "number": 55 + item.telefone,
-  //     "message": smsScript,
-  //     "forceSend": true,
-  //     "verifyContact": true
-  //   });
-
-  //   var requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: 'follow'
-  //   };
-  //   fetch("https://api.zapstar.com.br/core/v2/api/chats/send-text", requestOptions)
-  //     .then(response => response.text())
-  //     .then(result => console.log(result))
-  //     .catch(error => console.log('error', error));
-  // })
-  // }, 20000);
-  // }
-
-  console.log(cliente30)
 
 
   useEffect(() => {
