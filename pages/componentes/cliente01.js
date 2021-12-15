@@ -26,8 +26,8 @@ export default function Cliente01() {
         myHeaders.append("Content-Type", "application/json");
   
         var raw = JSON.stringify({
-          // "number": 55 + item.telefone,
-          "number": 5516988247675,
+          "number": 55 + item.telefone,
+          // "number": 5516988247675,
           "message": smsScript,
           "forceSend": true,
           "verifyContact": false
