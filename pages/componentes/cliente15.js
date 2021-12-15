@@ -45,6 +45,7 @@ export default function Cliente15() {
           .catch(error => console.log('error', error));
       }, index * 20000);
     });
+    
   }
 
   useEffect(() => {

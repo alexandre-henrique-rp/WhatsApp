@@ -44,6 +44,7 @@ export default function Cliente10() {
           .catch(error => console.log('error', error));
       }, index * 20000);
     });
+    console.log('concluído')
   }
 
   useEffect(() => {
