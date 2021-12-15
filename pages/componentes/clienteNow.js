@@ -12,40 +12,38 @@ export default function ClienteNow() {
     setClienteNow(dados);
   }
 
-  const enviarMensagem = () => {
-
-    var dia = ": *HOJE*"
-
-    
-    // setTimeout(() => {
-    clienteNow.forEach((item) => {
-      var smsScript = "Prezado Cliente \n \nEstamos entrando em contato para informar que o seu Certificado digital \nModelo: *" + item.tipocd + ". - " + item.nome + "* \nExpira " + dia + "            " + item.vctoCD.substr(8, 2) + "/" + item.vctoCD.substr(5, 2) + "/" + item.vctoCD.substr(0, 4) + "      \nfc:" + item.id + "       \n \nNão deixe para a última hora, ligue agora          \npara (16) 3325-4134 e renove o seu certificado.          \nAtenciosamente Equipe Rede Brasil Rp"
-
-      var myHeaders = new Headers();
-      myHeaders.append("access-token", "60de0c8bb0012f1e6ac5546b");
-      myHeaders.append("Content-Type", "application/json");
-
-      var raw = JSON.stringify({
-        "number": 55 + item.telefone,
-        "message": smsScript,
-        "forceSend": true,
-        "verifyContact": false
-      });
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-      };
-
-
-      fetch("https://api.zapstar.com.br/core/v2/api/chats/send-text", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));
-    })
-    // }, 20000);
+  function enviarMensagem() {
+    clienteNow.forEach(function (item, index) {
+      setTimeout(function () {
+        
+        var dia = ": *HOJE*"
+        var smsScript = "Prezado Cliente \n \nEstamos entrando em contato para informar que o seu Certificado digital \nModelo: *" + item.tipocd + ". - " + item.nome + "* \nExpira " + dia + "          " + item.vctoCD.substr(8, 2) + "/" + item.vctoCD.substr(5, 2) + "/" + item.vctoCD.substr(0, 4) + "            \nfc:" + item.id + "       \n \nNão deixe para a última hora, ligue agora          \npara (16) 3325-4134 e renove o seu certificado.          \nAtenciosamente Equipe Rede Brasil Rp"
+  
+        var myHeaders = new Headers();
+        myHeaders.append("access-token", "60de0c8bb0012f1e6ac5546b");
+        myHeaders.append("Content-Type", "application/json");
+  
+        var raw = JSON.stringify({
+          "number": 55 + item.telefone,
+          // "number": 5516988247675,
+          "message": smsScript,
+          "forceSend": true,
+          "verifyContact": false
+        });
+  
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+  
+        fetch("https://api.zapstar.com.br/core/v2/api/chats/send-text", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+      }, index * 20000);
+    });
   }
 
 
