@@ -45,6 +45,7 @@ export default function Cliente01() {
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
       }, index * 20000);
+      console.log('inicio')
     });
   }
   

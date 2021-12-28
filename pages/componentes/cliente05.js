@@ -43,7 +43,7 @@ export default function Cliente05() {
           .then(result => console.log(result))
           .catch(error => console.log('error', error));
       }, index * 20000);
-      console.log('concluído')
+      console.log('inicio')
     });
   }
 
